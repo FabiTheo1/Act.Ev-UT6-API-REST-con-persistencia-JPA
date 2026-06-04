@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
+@Table(name= "autores")
 @Getter
 @Setter
 @NoArgsConstructor

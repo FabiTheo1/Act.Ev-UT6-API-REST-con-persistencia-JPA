@@ -1,0 +1,47 @@
+package com.biblioteca.biblioteca_api.controllers;
+
+import com.biblioteca.biblioteca_api.exceptions.ResourceNotFoundException;
+import com.biblioteca.biblioteca_api.models.Autor;
+import com.biblioteca.biblioteca_api.services.AutorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/autores")
+@RequiredArgsConstructor // Lombok inyecta el servicio automaticamente
+
+public class AutorController {
+    private final AutorService autorService;
+
+    @GetMapping
+    public ResponseEntity<List<Autor>> listarTodos() {
+        return ResponseEntity.ok(autorService.obtenerTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Autor> obtenerPorId(@PathVariable Long id) {
+        Autor autor = autorService.obtenerPorId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún libro con el ID: " + id));
+
+        return ResponseEntity.ok(autor);
+    }
+
+    @PostMapping
+    public ResponseEntity<Autor> crear(@RequestBody Autor autor) {
+        Autor nuevoAutor = autorService.guardar(autor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoAutor);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        boolean eliminado = autorService.eliminar(id);
+        if (!eliminado) {
+            throw new ResourceNotFoundException("Error al eliminar: No se encontró ningún autor con el ID " + id);
+        }
+        return ResponseEntity.noContent().build();
+    }
+}

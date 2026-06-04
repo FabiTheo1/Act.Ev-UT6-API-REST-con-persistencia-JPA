@@ -1,5 +1,6 @@
 package com.biblioteca.biblioteca_api.controllers;
 
+import com.biblioteca.biblioteca_api.exceptions.ResourceNotFoundException;
 import com.biblioteca.biblioteca_api.models.Libro;
 import com.biblioteca.biblioteca_api.services.LibroService;
 import lombok.RequiredArgsConstructor;
