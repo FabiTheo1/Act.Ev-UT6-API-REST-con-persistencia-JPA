@@ -8,26 +8,15 @@ Este proyecto consiste en el diseño y despliegue de una API REST funcional cons
 
 ---
 
-## 🚀 Requisitos Mínimos y Arquitectura
-
-El corazón de la aplicación cumple estrictamente con las directrices del **Núcleo Obligatorio** y los módulos de extensión acumulativos de la rúbrica:
-
-* **Arquitectura por Capas (RA9):** Aislamiento jerárquico estricto. El flujo de datos sigue el patrón `Controller ➡️ Service ➡️ Repository ➡️ Base de Datos`. El controlador jamás invoca de forma directa los repositorios.
-* **Persistencia Segura con Optional (RA9 d):** Todos los métodos de consulta por identificador (`findById`) devuelven contenedores `Optional<T>`. Se evita el uso directo de `.get()` para prevenir excepciones de tipo `NullPointerException`, procesando los flujos mediante programación funcional con métodos como `.orElseThrow()`.
-* **Manejo Global de Excepciones (Módulo D):** Se ha implementado un interceptor centralizado `@ControllerAdvice` que captura las excepciones en tiempo de ejecución (como `ResourceNotFoundException`) y estandariza las respuestas de error en un formato JSON limpio y legible para el cliente.
-* **Inyección de Dependencias Optimizada:** Uso de la biblioteca **Lombok** mediante la anotación `@RequiredArgsConstructor` sobre atributos declarados como `private final`. Esto genera los constructores en tiempo de compilación y asegura una inyección limpia gestionada por el contenedor de Spring sin necesidad de acoplamiento manual.
-
----
-
 ## 🛠️ Tecnologías y Dependencias Utilizadas
 
 El entorno tecnológico del proyecto utiliza las siguientes herramientas integradas mediante **Maven**:
 
-* **Java 17 / 21** (Versión LTS del lenguaje)
-* **Spring Boot 3.x**
+* **Java 25** (Versión LTS del lenguaje)
+* **Spring Boot 4.XX**
 * **Spring Web** (Despliegue de endpoints REST y serialización automática a JSON)
 * **Spring Data JPA** (Abstracción de persistencia mediante Hibernate)
-* **H2 Database** / **MySQL** (Motor de persistencia relacional en memoria/local)
+* **MySQL** (Motor de persistencia relacional en memoria/local)
 * **Lombok** (Eliminación de código repetitivo de Boilerplate mediante anotaciones)
 * **Spring Boot Starter Validation** (Validación semántica de datos de entrada)
 
