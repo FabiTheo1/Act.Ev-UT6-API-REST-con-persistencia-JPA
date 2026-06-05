@@ -32,6 +32,11 @@ public class LibroController {
         return ResponseEntity.ok(libro);
     }
 
+    @GetMapping("/autor/{autorId}")
+    public ResponseEntity<List<Libro>> obtenerPorAutor(@PathVariable Long autorId) {
+        return ResponseEntity.ok(libroService.obtenerPorAutor(autorId));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Libro> actualizar(@PathVariable Long id, @Valid @RequestBody Libro libroActualizado) {
         Libro libroExistente = libroService.obtenerPorId(id)
@@ -46,7 +51,7 @@ public class LibroController {
     }
 
     @PostMapping
-    public ResponseEntity<Libro> crear(@RequestBody Libro libro) {
+    public ResponseEntity<Libro> crear(@Valid @RequestBody Libro libro) {
         Libro nuevoLibro = libroService.guardar(libro);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoLibro);
     }

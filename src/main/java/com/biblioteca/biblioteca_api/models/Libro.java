@@ -1,5 +1,7 @@
 package com.biblioteca.biblioteca_api.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,13 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El título es obligatorio")
     private String titulo;
+
+    @NotBlank(message = "El ISBN no puede estar vacío")
     private String isbn;
+
+    @NotNull(message = "El año de publicación es obligatorio")
     private Integer anioPublicacion;
 
     @ManyToOne

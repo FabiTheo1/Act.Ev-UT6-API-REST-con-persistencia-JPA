@@ -33,4 +33,8 @@ public class LibroService {
         }
         return false;
     }
+    
+    public List<Libro> obtenerPorAutor(Long autorId) {
+        return libroRepository.findByAutorId(autorId);
+    }
 }

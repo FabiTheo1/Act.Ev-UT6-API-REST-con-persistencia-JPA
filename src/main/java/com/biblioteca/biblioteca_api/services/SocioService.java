@@ -17,6 +17,10 @@ public class SocioService {
         return socioRepository.findAll();
     }
 
+    public Long contarLibrosDeSocio(Long socioId) {
+        return socioRepository.contarLibrosPrestadosPorSocio(socioId);
+    }
+
     public Optional<Socio> obtenerPorId(Long id) {
         return socioRepository.findById(id);
     }
