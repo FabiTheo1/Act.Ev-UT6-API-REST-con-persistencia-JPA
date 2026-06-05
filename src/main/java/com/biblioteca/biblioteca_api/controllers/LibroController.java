@@ -1,7 +1,10 @@
 package com.biblioteca.biblioteca_api.controllers;
 
+import com.biblioteca.biblioteca_api.exceptions.ResourceNotFoundException;
 import com.biblioteca.biblioteca_api.models.Libro;
 import com.biblioteca.biblioteca_api.services.LibroService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,19 @@ public class LibroController {
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún libro con el ID: " + id));
         
         return ResponseEntity.ok(libro);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Libro> actualizar(@PathVariable Long id, @Valid @RequestBody Libro libroActualizado) {
+        Libro libroExistente = libroService.obtenerPorId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se puede actualizar. Libro no encontrado con ID: " + id));
+
+        libroExistente.setTitulo(libroActualizado.getTitulo());
+        libroExistente.setIsbn(libroActualizado.getIsbn());
+        libroExistente.setAnioPublicacion(libroActualizado.getAnioPublicacion());
+        
+        Libro libroGuardado = libroService.guardar(libroExistente);
+        return ResponseEntity.ok(libroGuardado);
     }
 
     @PostMapping
