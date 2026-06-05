@@ -22,12 +22,31 @@ public class AutorController {
         return ResponseEntity.ok(autorService.obtenerTodos());
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<Autor> obtenerPorNombre(@RequestParam(required = false) String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        Autor autor = autorService.obtenerPorNombre(nombre) // Debe crear este método en AutorService
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún autor llamado: " + nombre));
+        return ResponseEntity.ok(autor);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Autor> obtenerPorId(@PathVariable Long id) {
         Autor autor = autorService.obtenerPorId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún autor con el ID: " + id));
-
         return ResponseEntity.ok(autor);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Autor> actualizar(@PathVariable Long id, @RequestBody Autor autorActualizado) {
+        Autor autorExistente = autorService.obtenerPorId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se puede actualizar. Autor no encontrado con ID: " + id));
+
+        autorExistente.setNombre(autorActualizado.getNombre());
+
+        return ResponseEntity.ok(autorService.guardar(autorExistente));
     }
 
     @PostMapping

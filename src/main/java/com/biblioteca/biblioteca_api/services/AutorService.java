@@ -17,6 +17,10 @@ public class AutorService {
         return autorRepository.findAll();
     }
 
+    public Optional<Autor> obtenerPorNombre(String nombre) {
+        return autorRepository.findByNombre(nombre);
+    }
+
     public Optional<Autor> obtenerPorId(Long id) {
         return autorRepository.findById(id);
     }
