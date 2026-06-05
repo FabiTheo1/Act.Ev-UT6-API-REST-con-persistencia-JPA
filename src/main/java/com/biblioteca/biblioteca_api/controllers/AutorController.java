@@ -25,7 +25,7 @@ public class AutorController {
     @GetMapping("/{id}")
     public ResponseEntity<Autor> obtenerPorId(@PathVariable Long id) {
         Autor autor = autorService.obtenerPorId(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún libro con el ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún autor con el ID: " + id));
 
         return ResponseEntity.ok(autor);
     }

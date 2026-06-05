@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/autores")
+@RequestMapping("/api/v1/socios")
 @RequiredArgsConstructor // Lombok inyecta el servicio automaticamente
 
 public class SocioController {
@@ -25,15 +25,15 @@ public class SocioController {
     @GetMapping("/{id}")
     public ResponseEntity<Socio> obtenerPorId(@PathVariable Long id) {
         Socio socio = socioService.obtenerPorId(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún libro con el ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró ningún socio con el ID: " + id));
 
         return ResponseEntity.ok(socio);
     }
 
     @PostMapping
     public ResponseEntity<Socio> crear(@RequestBody Socio socio) {
-        Socio nuevoAutor = socioService.guardar(socio);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoAutor);
+        Socio nuevoSocio = socioService.guardar(socio);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoSocio);
     }
 
     @DeleteMapping("/{id}")
