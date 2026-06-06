@@ -7,7 +7,7 @@ Actividad de Evaluación Final de la **UT6: Ficheros y Acceso a BBDD** para el c
 ## 👥 Participantes y Reparto de Capas
 El proyecto ha sido diseñado y desarrollado de manera conjunta y equilibrada de forma vertical:
 * **Fabián González Olofsson:** Responsable del diseño e implementación del ciclo completo de capas (Entidades, Repositorios, Servicios y Controladores) de las entidades `Libro` y `Socio`, el desarrollo de consultas complejas con JPQL (`@Query`), el control de la tabla asociativa intermedia de préstamos (`@ManyToMany`), y la estructura de calidad del software mediante el interceptor global de excepciones (`@ControllerAdvice`).
-* **Daniel:** Responsable del diseño e implementación del ciclo completo de capas de la entidad `Autor`, el control de la recursividad cíclica en relaciones de persistencia (`@JsonIgnore`), la lógica de filtrado y métodos derivados mediante Query Params (`@RequestParam`), y la infraestructura de seguridad perimetral de la API mediante **Spring Security**.
+* **Daniel Flores Medina:** Responsable del diseño e implementación del ciclo completo de capas de la entidad `Autor`, el control de la recursividad cíclica en relaciones de persistencia (`@JsonIgnore`), la lógica de filtrado y métodos derivados mediante Query Params (`@RequestParam`), y la infraestructura de seguridad perimetral de la API mediante **Spring Security**.
 
 ---
 
